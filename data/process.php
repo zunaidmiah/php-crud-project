@@ -17,3 +17,7 @@ if (isset($_POST['create'])) {
     $conn->close();
   }
 }
+
+?>
+<br>
+<a href="../index.php">Go Back</a>
