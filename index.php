@@ -2,6 +2,7 @@
     <?php 
         require_once 'view/head.php';
         require_once 'data/select.php';
+        session_start();
           // Program to display current page URL.
     ?>
     <div class="container py-4 my-4">
@@ -12,6 +13,11 @@
             </a>
         </h2>
         <hr>
+        <?php if(isset($_SESSION['message'])){?>
+        <div class="alert alert-success" role="alert">
+            <?php print $_SESSION['message']; ?>
+        </div>
+        <?php $_SESSION['message'] = null; } ?>
         <div class="row">
             <table class="table table-striped">
                 <thead>
@@ -36,10 +42,10 @@
                         <td><?php echo $row['address'];?></td>
                         <td><?php echo $row['gender'];?></td>
                         <td>
-                            <a href="" class="btn btn-primary">
+                            <a href="create.php?id=<?php echo $row['id']; ?>" class="btn btn-primary">
                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                             </a>
-                            <a href="" class="btn btn-danger">
+                            <a href="data/delete.php?id=<?php echo $row['id']; ?>" class="btn btn-danger">
                                 <i class="fa fa-trash-o" aria-hidden="true"></i>
                             </a>
                         </td>
@@ -52,6 +58,19 @@
                 </tbody>
             </table>
         </div>
+    </div>
+    <div aria-label="Page navigation example" class="mb-4">
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+            <li class="page-item"><a class="page-link" href="?page=2">2</a></li>
+            <li class="page-item"><a class="page-link" href="?page=3">3</a></li>
+            <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+            </li>
+        </ul>
     </div>
 
     <?php require_once 'view/footer.php'; ?>

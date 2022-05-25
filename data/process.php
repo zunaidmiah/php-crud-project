@@ -9,7 +9,9 @@ if (isset($_POST['create'])) {
 
   if(!$conn->connect_error){
     if ($conn->query($sql_query) === TRUE) {
-      echo "New record created successfully";
+      session_start();
+      $_SESSION['message'] = 'New record created successfully';
+      header("Location: ../index.php");
     } else {
       echo "Error: " . $sql_query . "<br>" . $conn->error;
     }
