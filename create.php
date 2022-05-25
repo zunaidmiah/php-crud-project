@@ -3,7 +3,7 @@
     <div class="container  py-4 my-4">
         <h2>Add new information</h2><hr>
         <div class="form">
-            <form action="../data/process.php" method="post">
+            <form action="data/process.php" method="post">
                 <div class="form-group">
                     <label for="full_name">Full Name</label>
                     <input type="text" class="form-control" name="full_name" id="full_name" placeholder="Enter full name">
