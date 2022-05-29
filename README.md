@@ -1,11 +1,5 @@
 # php-crud-project
  This is php crud project
-# socket-server
-Create socket server and use this for live message
-
-Official documentation for socket.io. [click here](https://socket.io/docs/v4/)
-
-<br>
 <br>
 Folow this instruction step by step, You can be easily create a php crud project.<br>
 Lets' start<br>
