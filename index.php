@@ -30,10 +30,10 @@
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="search_text">
                 <?php if($data) { 
                     if ($data->num_rows > 0) {
-                    $i =1;
+                    $i =(($page-1)*10) + 1;
                      while($row = $data->fetch_assoc()) {?>
                     <tr>
                         <th><?php echo $i; ?></th>
@@ -59,18 +59,38 @@
             </table>
         </div>
     </div>
-    <div aria-label="Page navigation example" class="mb-4">
+    <?php if(isset($status) and $status){ 
+        $next = false;
+        if(isset($data) and $data->num_rows == 10){
+            $next = true;
+        }
+        ?>
+    <div aria-label="Page navigation example" class="mb-4" id="pagination">
         <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1">Previous</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
-            <li class="page-item"><a class="page-link" href="?page=2">2</a></li>
-            <li class="page-item"><a class="page-link" href="?page=3">3</a></li>
+            <?php if($page != 1){ ?>
             <li class="page-item">
-            <a class="page-link" href="#">Next</a>
+            <a class="page-link" href="?page=<?php echo $page-1; ?>" tabindex="-1">Previous</a>
             </li>
+            <?php } ?>
+            <?php 
+                if($page == 1 and $next){
+                    $start = 1; $end = $page+1;
+                } elseif($page != 1 and $next){
+                    $start = $page-1; $end = $page+1;
+                } else{
+                    $start = 1; $end = $page;
+                }
+            ?>
+            <?php for($i=$start;$i<=$end;$i++){?>
+            <li class="page-item"><a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+            <?php } ?>
+            <?php if($next){ ?>
+            <li class="page-item">
+            <a class="page-link" href="?page=<?php echo $page+1; ?>">Next</a>
+            </li>
+            <?php } ?>
         </ul>
     </div>
+    <?php } ?>
 
     <?php require_once 'view/footer.php'; ?>
